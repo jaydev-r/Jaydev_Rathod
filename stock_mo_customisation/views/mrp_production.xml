@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_production_form_inh" model="ir.ui.view">
+        <field name="name">Mrp Production Form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <field name="product_qty" position="after">
+                <field name="is_readonly"/>
+            </field>
+            <xpath expr="//field[@name='qty_producing']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="readonly">is_readonly or state == "cancel" or ( state == "done" and is_locked )
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

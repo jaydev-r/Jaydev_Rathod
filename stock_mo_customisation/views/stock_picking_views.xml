@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_picking_form_inh" model="ir.ui.view">
+        <field name="name">Stock Picking Form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="tag_ids" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_picking_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.tree.inherit.tags</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="tag_ids" widget="many2many_tags" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_search_inh" model="ir.ui.view">
+        <field name="name">Stock Picking Search</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="tag_ids"/>
+            </search>
+            <xpath expr="//filter[@name='my_transfers']" position="before">
+                <filter name="tag_ids" string="Tags" domain="[]" context="{'group_by': 'tag_ids'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

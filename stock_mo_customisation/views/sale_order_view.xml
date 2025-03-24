@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_form_inh_1" model="ir.ui.view">
+        <field name="name">Sale Order Form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="customer_code" widget="CopyClipboardChar"/>
+            </field>
+        </field>
+    </record>
+
+     <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+        <field name="context">{'search_default_sales': 1}</field>
+        <field name="domain">[('state', 'in', ['sale', 'done'])]</field>
+    </record>
+</odoo>
